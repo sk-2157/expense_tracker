@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+    <h2>Analytics Dashboard</h2>
+    {% if no_data %}
+      <p>No expenses to display.</p>
+    {% else %}
+      <!-- KPIs -->
+      <div class="row mb-4">
+        <div class="col-md-3">
+          <div class="card text-center border-primary mb-2">
+            <div class="card-body">
+              <h6 class="card-title">Total Spend This Month</h6>
+              <p class="card-text display-6">₹{{ total_spend_month }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center border-success mb-2">
+            <div class="card-body">
+              <h6 class="card-title">Top Category</h6>
+              <p class="card-text">{{ top_category }} (₹{{ top_category_amt }})</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center border-danger mb-2">
+            <div class="card-body">
+              <h6 class="card-title">Max Single Expense</h6>
+              <p class="card-text">₹{{ max_expense }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center border-info mb-2">
+            <div class="card-body">
+              <h6 class="card-title">Number of Expenses</h6>
+              <p class="card-text">{{ num_expenses }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          {{ pie_chart|safe }}
+        </div>
+        <div class="col-md-6 mb-4">
+          {{ donut_chart|safe }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          {{ bar_chart|safe }}
+        </div>
+        <div class="col-md-6 mb-4">
+          {{ line_chart|safe }}
+        </div>
+      </div>
+    {% endif %}
+{% endblock %}
